@@ -1,0 +1,72 @@
+{% extends "base/base.html" %} <!-- Bloque, Plantilla base -->
+    {% block title %}Registrar Centro de Votación{% endblock %}
+    
+    {% block contenido %}
+	<form method="post">
+	    {% csrf_token %}
+	    <table>
+		<tr>
+		    <td colspan='6' style='background-color: #D9EDF7'>Registrar Centro Votación</td>
+		</tr>
+		<tr>
+		    <td>Estado</td>
+		    <td>
+			<select id="id_cod_estado" name="estado" required=True style='width: 200px;'>
+			    <option value="">-----------------------------</option>
+			    {% for e in list_estado %}
+				<option value='{{e.cod_estado}}'>{{ e.estado }}</option>
+			    {% endfor %}
+			</select>
+		    </td>
+		    <td>Municipio</td>
+		    <td>
+			<select id="id_cod_municipio" name="municipio" required=True style='width: 200px;'>
+			    <option value="" selected="selected">----------------------------</option>
+			</select>
+		    </td>
+		    <td>Parroquia</td>
+		    <td>
+			<select id="id_cod_parroquia" name="parroquia" required=True style='width: 200px;'>
+			    <option value="" selected="selected">---------------------</option>
+			</select>
+		    </td>
+		    </tr>
+		    <tr>
+			<td>Codigo centro</td>
+			<td>
+			    <input id="id_cod_n" maxlength="11" name="cod_n" type="number" required=True />
+			    <input id="id_mun" maxlength="11" name="id_mun" type="hidden" />
+			</td>
+			<td>Codigo centro viejo</td>
+			<td>
+			    <input id="id_cod_v" maxlength="11" name="cod_v" type="number" required=True/>
+			</td>
+		    </tr>
+		    <tr>
+			<td colspan='6' style='background-color: #D9EDF7'>Centro de votación</td>
+		    </tr>
+		    <tr>
+			<td colspan='6'>
+			    <textarea cols="135" id="id_c_votacion" maxlength="1500" name="c_votacion" rows="10" required=True></textarea>
+			</td>
+		    </tr>
+		    <tr>
+			<td colspan='6' style='background-color: #D9EDF7'>Dirección</td>
+		    </tr>
+		    <tr>
+			<td colspan='6'><textarea cols="135" id="id_direccion" maxlength="1500" name="direccion" rows="10" required=True></textarea></td>
+		    </tr>
+		    <tr>
+			<td><input type="submit" value="Registrar"/></td>
+		    </tr>
+	    </table>
+	</form>
+    {% endblock contenido%}
+
+
+
+
+
+
+
+

@@ -1,0 +1,125 @@
+{% extends "base/base.html" %} <!-- Heredando (Bloque) plantilla index -->
+    {% block title %}Lista de Electores{% endblock title%}
+    {% if form.non_field_errors %}
+    <div class="panel">
+      {{ form.non_field_errors }}
+    </div>
+  {% endif %}
+  {% block contenido %}
+		<script>
+		$(document).ready( function () {
+		    /*$('#list_registro').DataTable({
+			"paging": false,
+			language: {
+			    search: "Buscar: ",
+			}
+		    });*/
+		    
+		    var Tlist_registroE = $('#list_registro').dataTable({
+		    "iDisplayLength": 5,
+			    "iDisplayStart": 0,
+			    "sPaginationType": "full_numbers",
+			    "aLengthMenu": [5, 10, 20, 30, 40, 50],
+			    "oLanguage": {"sUrl": "/static/js/es.txt"},
+			    "aoColumns": [
+			    {"sClass": "registro center", "sWidth": "2%"},
+			    {"sClass": "registro center", "sWidth": "3%"},
+			    {"sClass": "registro center", "sWidth": "4%"},
+			    {"sClass": "registro center", "sWidth": "17%"},
+			    {"sClass": "registro center", "sWidth": "4%"},
+			    {"sClass": "registro center", "sWidth": "8%"},
+			    {"sClass": "registro center", "sWidth": "4%"},
+			    {"sClass": "registro center", "sWidth": "4%"},
+			    {"sWidth": "3%", "bSortable": false, "sClass": "center sorting_false", "bSearchable": false}
+			    ]
+		    });
+		    
+		} );
+		</script>
+    <table style='width: 90em;' id='list_registro'>
+			<thead>
+      <tr>
+        <th colspan=3>
+          <a href='/registro_electoral/data'>
+            <button hidden=True>Importar Electores</button>
+          </a>
+        </th>
+      </tr>
+      <tr>
+        <th colspan='9' style='text-align:left;'>
+          <a href="/registro_electoral/registrar_elector" title='Nuevo'>  
+            Registrar elector
+          </a>
+        </th>
+      </tr>
+      <tr style='background-color: #D9EDF7;'>
+        <th>Item</th>
+        <th>Estado</th>
+        <th>Municipio</th>
+        <th>Parroquia</th>
+        <th>Código</th>
+        <th>Centro</th>
+				<th>Cédula</td>
+				<th>Nombres y Apellidos</th>
+				<th colspan=2>Acción</th>
+				
+      </tr>
+      </thead>
+			<tbody>
+      {% for e in listar_elector %}
+      <tr>
+        <td>{{e.id}}</td>
+        <td>{{ e.cod_estado.estado }}</td>
+        <td>
+          {% for m in municipio %}
+            {% if m.cod_municipio == e.cod_municipio_id %}
+              {{m.municipio}}
+            {% endif %}
+          {% endfor %}
+        </td>
+        <td>
+
+          {% for p in parroquia %}
+            {% if  p.estado_id == e.cod_estado_id and p.municipio == e.cod_municipio_id and p.cod_parroquia == e.cod_parroquia_id%}
+              {{p.parroquia}}
+            {% endif %}
+          {% endfor %}
+
+        </td>
+        <td style='color:#145876;'>{{e.cod_nuevo.cod_n}}</td>
+        <td>{{e.cod_nuevo.c_votacion}}</td>
+        <td>{{e.nac}}-{{ e.cedula }}</td>
+        <td>
+					
+					{% if e.p_apellido %}
+						{{ e.p_apellido }}
+					{% endif %}
+					
+					{% if e.s_apellido %}
+						{{ e.s_apellido }}
+					{% endif %}
+					
+					{% if e.p_nombre %}
+						{{ e.p_nombre }}
+					{% endif %}
+					
+					{% if e.s_nombre %}
+						{{ e.s_nombre }}
+					{% endif %}
+					
+					
+					</td>
+        <td>
+          <a href='{% url "actualizar_elector" e.id %}'>
+            <img src='../../static/admin/img/icon_changelink.gif' title='Editar'>
+          </a>
+	  <a onclick="eliminar_data('{{e.id}}', '/registro_electoral/eliminar_elector/')"><!--Forma anterior: href='{% url "eliminar_elector" e.id %}'-->
+            <img src='../../static/admin/img/icon_deletelink.gif' title='Eliminar'>
+          </a>
+        </td>
+      </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    {% endblock contenido%}
+<!-- ************************************************************* -->

@@ -1,0 +1,17 @@
+{
+    "sProcessing":   "Procesando...",
+    "sLengthMenu":   "<label class='control-label'>Mostrar</label> <div style='width:150px;'>_MENU_</div>",
+    "sZeroRecords":  "<center>No se encontrarón resultados</center>",
+    "sInfo":         "<div style='width:50em;height:3em;'>desde _START_ hasta _END_  (<span style='color:red'>_TOTAL_ total</span>)</div>",
+    "sInfoEmpty":    "",
+    "sInfoFiltered": "(total _MAX_)",
+    "sInfoPostFix":  "",
+    "sSearch":       "Buscar: ",
+    "sUrl":          "",
+    "oPaginate": {
+        "sFirst":    "<button class='btn btn-default'>Primero</button>     ",
+        "sPrevious": "<button class='btn btn-default'>Anterior</button>     ",
+        "sNext":     "     <button class='btn btn-default'>Siguiente</button>     ",
+        "sLast":     "<button class='btn btn-default'>&Uacute;ltimo</button>"
+    }
+}

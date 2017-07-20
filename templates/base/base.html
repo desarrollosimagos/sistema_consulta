@@ -1,0 +1,130 @@
+<html lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <title>{% block title %}Sistema de Consulta Electoral CNE{% endblock title%}</title>
+	<!--<link rel="stylesheet" href="{{STATIC_URL}}js/jquery-ui-1.11.2/themes/base/jquery-ui.css" />-->
+        <script src="{{STATIC_URL}}js/jquery-1.11.2.min.js"></script>
+        <script src="{{STATIC_URL}}js/DataTables-1.10.5/media/js/jquery.js"></script>
+        <script src="{{STATIC_URL}}js/DataTables-1.10.5/media/js/jquery.dataTables.js"></script>
+        <!--<script src="{{STATIC_URL}}js/bootstrap.js"></script>-->
+        <script src="{{STATIC_URL}}js/bootstrap.min.js"></script>
+        <script src="{{STATIC_URL}}js/json_response.js"></script>
+		<script src="{{STATIC_URL}}js/jquery-ui-1.11.2/jquery-ui.js"></script>
+		<script src="{{STATIC_URL}}js/jquery.ui.datepicker-es.js"></script>
+        <script src="{{STATIC_URL}}js/foundation.min.js"></script>
+        <script src="{{STATIC_URL}}js/custom.modernizr.js"></script>
+        <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/style.css">
+        <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/foundation.min.css">
+        <script src="{{STATIC_URL}}js/DataTables-1.10.5/media/css/jquery.dataTables.css"></script>
+        
+        <!--<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/bootstrap.css">-->
+        
+	<script>
+	    $(function () {
+	    $("#datepicker").datepicker();
+	    });
+	</script>
+	{% block extra_head %}{% endblock extra_head%}
+	<!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//estadistica.bva.org.ve/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 7]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//estadistica.bva.org.ve/piwik.php?idsite=7" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
+	</head>
+	<body>
+        <nav class="top-bar">
+			<ul class="title-area">
+			    <li class="name">
+					<h1>
+					    <a href="/" title="Inicio">
+						Sistema de Consulta Electoral CNE
+					    </a>
+					</h1>
+				</li>
+			</ul>
+	    </nav>
+	    {% if user.is_authenticated %}
+	    <div class="btn-group" style='margin-top:-4.4em;margin-left:40em;float:left;position: relative;'>
+  			<button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown">Registro Electoral
+  			</button>
+			  <ul class="dropdown-menu">
+			  	<li>
+			    	<a href='/registro_electoral/listar_elector'>Registro Electoral</a>
+			    </li>
+			  </ul>
+		</div>
+		<div class="btn-group" style='margin-top:-4.4em;margin-left:47.5em;position: relative;'>
+  			<button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown">Mantenimiento
+  			<span class="caret"></span>
+  			</button>
+			  <ul class="dropdown-menu">
+			  	<li>
+			    	<a href="/estado/lista_estado">Estado</a>
+				</li>
+				<li>
+			    	<a href="/municipio/listar_municipios">Municipio</a>
+			    </li>
+				<li>
+					<a href="/parroquia/listar_parroquia">Parroquia</a>
+				</li>
+				<li>
+					<a href="/centro_votacion/listar_centro_votacion">Centro de Votación</a>
+				</li>
+				<li>
+					<a href="/iniciar/nuevo_usuario">Usuario</a>
+				</li>
+			  </ul>
+		</div>
+		{% endif %}
+		{% if user.is_authenticated %}
+		<div class="btn-group" style='margin-top:-4.6em;margin-left:54.6em;position:relative;'>
+  			<button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown">Cerrar sesión
+  			</button>
+  			<ul class="dropdown-menu">
+  				<li>
+		    		<a href="/iniciar/logout">Cerrar sesión: {{ user }}</a>
+		    	</li>
+		  	</ul>
+		</div>
+		{% endif %}
+		{% if not user.is_authenticated %}
+		<div class="btn-group" style='margin-top:-4.6em;margin-left:54.6em;position:relative;'>
+  			<button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown">
+  			Iniciar sesión
+  			</button>
+  			<ul class="dropdown-menu">
+  				<li>
+		    		<a href="/iniciar/login">Iniciar sesión</a>
+		    	</li>
+		  	</ul>
+		</div>
+	
+		{% endif %}
+  <!-- ========Bloque de elemento para renderizar las Vistas====== -->
+        
+		<center>
+    		{% block contenido %}{% endblock contenido %}
+    	</center>
+      
+  <!-- =========================================================== -->
+  <!-- Bloque de elemento para iniciar sesión-- >
+  <div id="center">
+  	{% block sesion %}{% endblock sesion %}
+  </div>
+
+<script>
+  $(document).foundation();
+</script>
+</body>
+<html>

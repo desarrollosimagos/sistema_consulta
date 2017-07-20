@@ -1,0 +1,89 @@
+{% extends "base/base.html" %} <!-- Heredando (Bloque) plantilla index -->
+	{% block title %}Lista de Centros{% endblock title%}
+	{% if form.non_field_errors %}
+	<div class="panel">
+	  {{ form.non_field_errors }}
+	</div>
+	{% endif %}
+
+	{% block contenido %}
+	<!-- ************************************************************* -->
+	    <table style='width:80em;'>
+	      <tr>
+		<td colspan=3>
+		  <a href='/centro_votacion/data'>
+		  	{% if user.username == "admin" %}
+				<button>Importar Centros</button>
+			{% endif %}
+    	  </a>
+		</td>
+	      </tr>
+	      <tr>
+	      <td style='text-align: left' colspan='7'>
+		  <a href="/centro_votacion/registrar_centro" title='Nuevo'>  
+		    Registrar Centro
+		  </a>
+		</td>
+	      </tr>
+	      <tr style='background-color: #D9EDF7;text-align: center;'>
+	    <td width='10px;'>Item</td>
+		<td width="150px;">Estado</td>
+		<td>Municipio</td>
+		<td>Parroquia</td>
+		<td>Código</td>
+		<td>Centro Votación</td>
+		<td colspan=3>Acción</td>
+	      </tr>
+	      {% for c in list_centro_votacion %}
+	      <tr style='text-align: center;' class="{% cycle 'impar' 'par' %}">
+	    <td>{{c.id}}</td>
+		<td>{{ c.estado }}</td>
+		<td>
+			{% for m in municipio %}
+				{% if m.cod_municipio == c.id_mun %}
+					{{m.municipio}}
+				{% endif %}
+			{% endfor %}
+		</td>
+		<td>
+
+			{% for p in parroquia %}
+				{% if  p.estado_id == c.estado_id  and p.municipio == c.id_mun and p.cod_parroquia == c.parroquia%}
+					{{p.parroquia}}
+				{% endif %}
+			{% endfor %}
+
+		</td>
+		<td>{{c.cod_n}}</td>
+		<td>{{ c.c_votacion }}</td>
+		<td>
+		  <a href='{% url 'actualizar_centro' c.id %}'>
+		    <img src='../../static/admin/img/icon_changelink.gif' title='Editar'>
+		  </a>
+		</td>
+		<td>
+		  <a onclick="eliminar_data('{{c.id}}','/centro_votacion/eliminar_centro/')">
+		    <img src='../../static/admin/img/icon_deletelink.gif' title='Eliminar'></td>
+		  </a>
+	      </tr>
+	      {% empty %}
+	      <tr style='text-align: center;'>
+		<td colspan=2>No se encuentran registros</td>
+	      </tr>
+	      {% endfor %}
+	    </table>
+	    <div class="pagination" style='margin-left: 15em;'>
+	    <span class="step-links">
+	      {% if list_centro_votacion.has_previous %}
+		<a href="?page={{ list_centro_votacion.previous_page_number }}">Anterior</a>
+	      {% endif %}
+	    <span class="current">
+	      Página {{ list_centro_votacion.number }} de {{ list_centro_votacion.paginator.num_pages }}.
+	    </span>
+	    {% if list_centro_votacion.has_next %}
+	      <a href="?page={{ list_centro_votacion.next_page_number }}">Siguiente</a>
+	    {% endif %}
+	    </span>
+	    </div>
+	{% endblock contenido%}
+	<!-- ************************************************************* -->

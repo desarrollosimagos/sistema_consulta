@@ -1,0 +1,30 @@
+body{
+	font: 12% "Arial", sans-serif;
+	margin: 50px;
+}
+
+#center{
+	text-align: center;
+}
+
+a {
+	text-decoration: none;
+	cursor: pointer;
+}
+
+button{
+	border-radius: 9px;
+	--moz-border-radius:9px;
+}
+
+input[type="search"]{
+width: 150px!important;
+color:red!important;
+border-radius: 9px;
+--moz-border-radius:9px;
+
+}
+
+
+
+

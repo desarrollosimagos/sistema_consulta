@@ -1,0 +1,27 @@
+from rest_framework.serializers import ModelSerializer
+from .models import RegistroElectoral
+
+
+class RegistroSerializer(ModelSerializer):
+    class Meta:
+        model = RegistroElectoral
+        fields = (
+            'id',
+            'cedula',
+            #'nac',
+            'p_nombre',
+            's_nombre',
+            'p_apellido',
+            's_apellido',
+            #'f_nac',
+            'sexo',
+            'cod_estado',
+            'cod_municipio',
+            'cod_parroquia',
+            'cod_nuevo',
+	    'cod_estado__estado',
+            #'cod_viejo',
+            #'date_create',
+            #'date_update',
+            #'user',
+            )

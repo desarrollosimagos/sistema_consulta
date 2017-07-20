@@ -1,0 +1,112 @@
+{% extends "base/base.html" %} <!-- Heredando (Bloque) plantilla index -->
+
+{% block title %}Registrar Electores{% endblock title%} <!--Bloque para definir el título-->
+
+
+
+{% block contenido %} <!-- Apertura de la carga de datos en el bloque 'contenido' de la plantilla 'base' -->
+<body>
+    <h1>Registrar Electores</h1>
+    <form method="post">
+	{% csrf_token %}
+	<!--{{form.as_p}}-->
+	<table style="text-align:center;">
+	    <tr>
+		<td colspan="2" style='background-color: #D9EDF7'>
+		    Registrar elector
+		</td>
+	    </tr>
+	    <tr>
+		<td>Nacionalidad:</td>
+		<td>
+		  <select type='text' required id="id_nac" name="nac" style='width:200px;'>
+		    <option value='V'>Venezolano</option>
+		    <option value='E'>Extranjero</option>
+		  </select>
+		</td>
+	    </tr>
+	    <tr>
+		<td>Cédula:</td>
+		<td><input id="id_cedula" required maxlength="50" name="cedula" type="text" />
+		</td>
+	    </tr>
+	    <tr>
+		<td>Primer Apellido:</td>
+		<td><input type='text'  id="id_p_apellido" name="p_apellido"/></td>
+	    </tr>
+	    <tr>
+		<td>Segundo Apellido:</td>
+		<td><input type='text'  id="id_s_apellido" name="s_apellido"/></td>
+	    </tr>
+	    <tr>
+		<td>Primer Nombre:</td>
+		<td><input type='text'  id="id_p_nombre" name="p_nombre"/></td>
+	    </tr>
+	    <tr>
+		<td>Segundo Nombre:</td>
+		<td><input type='text'  id="id_s_nombre" name="s_nombre"/></td>
+	    </tr>
+	    <tr>
+		<td>Fecha de Nacimiento:</td>
+		<td><input type='text' required id="datepicker" name="f_nac"/></td>
+	    </tr>
+	    <tr>
+		<td>Sexo:</td>
+		<td>
+		  <select required id="id_sexo" name="sexo" style='width:200px;'>
+		    <option value=0>----------------</option>
+		    <option value='M'>Masculino</option>
+		    <option value='F'>Femenino</option>
+		  </select>
+		</td>
+	    </tr>
+	    <tr>
+		<td>Estado:</td>
+		<td>
+		  <select required id="id_cod_estado" name="cod_estado" style='width:200px;'/>
+		    <option value=0>----------------</option>
+		    {% for e in estados %}
+			<option value='{{e.cod_estado}}'>{{e.estado}}</option>
+		    {% endfor %}
+		  </select>
+		</td>
+	    </tr>
+	    <tr>
+		<td>Municipio:</td>
+		<td>
+		    <select required id="id_cod_municipio" name="cod_municipio" style='width:200px;'>
+			<option value=0>----------------</option>
+		    </select>
+		</td>
+	    </tr>
+	    <tr>
+		<td>Parroquia:</td>
+		<td>
+		  <select required id="id_cod_parroquia" name="cod_parroquia" style='width:200px;'>
+		    <option value=0>----------------</option>
+		  </select>
+		</td>
+	    </tr>
+	    <tr>
+		<td>Centro de Votación:</td>
+	    </tr>
+	    </table>
+	    <table>
+	    <tr>
+		<td colspan="2">
+		    <select required id="id_cod_nuevo" name="cod_nuevo" style='width:390px;'>
+			    <option value=0>------------------------------------------------------------</option>
+		    </select>
+		    <input type='hidden' id='id_cod_viejo' name='cod_viejo' value='sin codificar'>
+		    <input type='hidden' id='id_mun' name='mun' value='sin codificar'>
+		</td>
+		<td></td>
+	    </tr>
+	    <tr>
+		<td><input type="submit" value="Registrar"/></td>
+	    </tr>
+	</table>
+    </form>
+</body>
+</html>
+{% endblock contenido %} <!-- Cierre de la carga de datos en el bloque 'contenido' de la plantilla 'base' -->

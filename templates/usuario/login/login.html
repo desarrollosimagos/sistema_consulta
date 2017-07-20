@@ -1,0 +1,43 @@
+{% extends "base/base.html" %} <!-- Bloque, Plantilla base -->
+    {% block title %}Iniciar Sesión{% endblock %}
+    
+    {% block contenido %}
+	{% if form.non_field_errors %}
+	<div class="panel">
+	  {{ form.non_field_errors }}
+	</div>
+	{% endif %}
+	<!-- ************************************************************* -->
+	<form action="." method="POST" enctype="multipart/form-data" class="form-horizontal" autocomplete="off">
+		{% csrf_token %}
+			{% if mensaje%}
+				<div style="width:300px;margin-left:10px;color:#3B542F;">
+  					{{mensaje}}
+  				</div>
+  			{% endif %}
+		
+			<table style="text-align:center;">
+				<tr>
+					<td colspan="2" style='background-color: #D9EDF7'>
+						Iniciar Sesión
+					</td>
+				</tr>
+				<tr>
+					<td>Usuario</td>
+					<td><input type="text" required id="username" name="username" placeholder="Usuario"></td>
+				</tr>
+				<tr>
+					<td>Contraseña</td>
+					<td>
+						<input type="password" required id="password" name="password" placeholder="Contraseña">
+					</td>
+				</tr>
+				<tr>
+					<td colspan='2'>
+						<input type='submit' value='Iniciar'>
+						<input type="reset" id="borrar" value="Borrar">
+					</td>
+				</tr>
+	    	</table>
+	</form>
+    {% endblock contenido%}

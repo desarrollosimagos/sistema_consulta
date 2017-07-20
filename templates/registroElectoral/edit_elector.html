@@ -1,0 +1,163 @@
+{% extends "base/base.html" %} <!-- Heredando (Bloque) plantilla index -->
+
+{% block title %}Editar Electores{% endblock title%} <!--Bloque para definir el título-->
+
+{% block contenido %} <!-- Apertura de la carga de datos en el bloque 'contenido' de la plantilla 'base' -->
+<body>
+    <h1>Editar Electores</h1>
+    <form method="post">
+	{% csrf_token %}
+	<table style="text-align:center;">
+	    <tr>
+		<td colspan="2" style='background-color: #D9EDF7'>
+		    Editar elector
+		</td>
+	    </tr>
+	    <tr>
+		<td>Nacionalidad:</td>
+		<td>
+		    <!--<input type='text' required id="id_nac" name="nac" value='{{obj_regelector.nac}}'/>-->
+		    <select type='text' required id="id_nac" name="nac" style='width:200px;'>
+			{% if obj_regelector.nac == 'V' %}
+			    <option value='V' selected='selected'>Venezolano</option>
+			{% endif %}
+			{% if not obj_regelector.nac == 'V' %}
+			    <option value='V'>Venezolano</option>
+			{% endif %}
+			{% if obj_regelector.nac == 'E' %}
+			    <option value='E' selected='selected'>Extranjero</option>
+			{% endif %}
+			{% if not obj_regelector.nac == 'E' %}
+			    <option value='E'>Extranjero</option>
+			{% endif %}
+		    </select>
+		</td>
+	    </tr>
+	    <tr>
+		<td>Cédula:</td>
+		<td><input id="id_cedula" class="hola" required maxlength="50" name="cedula" type="text" value='{{obj_regelector.cedula}}'/>
+		</td>
+	    </tr>
+	    <tr>
+		<td>Primer Apellido:</td>
+		<td><input type='text'  id="id_p_apellido" name="p_apellido" value='{{obj_regelector.p_apellido}}'/></td>
+	    </tr>
+	    <tr>
+		<td>Segundo Apellido:</td>
+		<td><input type='text'  id="id_s_apellido" name="s_apellido" value='{{obj_regelector.s_apellido}}'/></td>
+	    </tr>
+	    <tr>
+		<td>Primer Nombre:</td>
+		<td><input type='text'  id="id_p_nombre" name="p_nombre" value='{{obj_regelector.p_nombre}}'/></td>
+	    </tr>
+	    <tr>
+		<td>Segundo Nombre:</td>
+		<td><input type='text'  id="id_s_nombre" name="s_nombre" value='{{obj_regelector.s_nombre}}'/></td>
+	    </tr>
+	    <tr>
+		<td>Fecha de Nacimiento:</td>
+		<td><input type='text' required id="datepicker" name="f_nac" value='{{f_nac}}'/></td>
+	    </tr>
+	    <tr>
+		<td>Sexo:</td>
+		<td>
+		    <!--<input type='text' required id="id_sexo" name="sexo" value='{{obj_regelector.sexo}}'/>-->
+		    <select required id="id_sexo" name="sexo" style='width:200px;'>
+			{% if obj_regelector.sexo == 0 %}
+			    <option value=0 selected='selected'>----------------</option>
+			{% endif %}
+			{% if not obj_regelector.sexo == 0 %}
+			    <option value=0>----------------</option>
+			{% endif %}
+			{% if obj_regelector.sexo == 'M' %}
+			    <option value='M' selected='selected'>Masculino</option>
+			{% endif %}
+			{% if obj_regelector.sexo == 'M' %}
+			    <option value='M'>Masculino</option>
+			{% endif %}
+			{% if obj_regelector.sexo == 'F' %}
+			    <option value='F' selected='selected'>Femenino</option>
+			{% endif %}
+			{% if obj_regelector.sexo == 'F' %}
+			    <option value='F'>Femenino</option>
+			{% endif %}
+		    </select>
+		</td>
+	    </tr>
+	    <tr>
+		<td>Estado:</td>
+		<td>
+		    <select required id="id_cod_estado" name="cod_estado" style='width:200px;'/>
+			<option value=0>----------------</option>
+			{% for e in estados %}
+			    {% if e.cod_estado == obj_regelector.cod_estado_id %}
+				<option value='{{e.cod_estado}}' selected='selected'>{{e.estado}}</option>
+			    {% endif %}
+			    {% if not e.cod_estado == obj_regelector.cod_estado_id%}
+				<option value='{{e.cod_estado}}'>{{e.estado}}</option>
+			    {% endif %}
+			{% endfor %}
+		    </select>
+		</td>
+	    </tr>
+	    <tr>
+		<td>Municipio:</td>
+		<td>
+		    <select required id="id_cod_municipio" name="cod_municipio" style='width:200px;'>
+			<option value=0>----------------</option>
+			    {% for m in municipios %}
+				{% if m.cod_municipio == obj_regelector.cod_municipio_id %}
+				    <option value='{{m.cod_municipio}}' selected='selected'>{{m.municipio}}</option>
+				{% endif %}
+				{% if not m.cod_municipio == obj_regelector.cod_municipio_id %}
+				    <option value='{{m.cod_municipio}}'>{{m.municipio}}</option>
+				{% endif %}
+			    {% endfor %}
+		    </select>
+		</td>
+	    </tr>
+	    <tr>
+		<td>Parroquia:</td>
+		<td>
+		    <select required id="id_cod_parroquia" name="cod_parroquia" style='width:200px;'>
+			<option value=0>----------------</option>
+			    {% for p in parroquias %}
+				{% if p.cod_parroquia == obj_regelector.cod_parroquia_id %}
+				    <option value='{{p.cod_parroquia}}' selected='selected'>{{p.parroquia}}</option>
+				{% endif %}
+				{% if not p.cod_parroquia == obj_regelector.cod_parroquia_id %}
+				    <option value='{{p.cod_parroquia}}'>{{p.parroquia}}</option>
+				{% endif %}
+			    {% endfor %}
+		    </select>
+		</td>
+	    </tr>
+	    <tr>
+		<td>Centro de votación:</td>
+	    </tr>
+	    </table>
+	    <table>
+	    <tr>
+		<td>
+		    <select required id="id_cod_nuevo" name="cod_nuevo" style='width:390px;'>
+			<option value=0>----------------------------------------------------------------</option>
+			{% for cv in centros %}
+			    {% if cv.cod_n == obj_regelector.cod_nuevo_id %}
+				<option value='{{cv.cod_n}}' selected='selected'>{{cv.c_votacion}}</option>
+			    {% endif %}
+			    {% if not cv.cod_n == obj_regelector.cod_nuevo_id %}
+				<option value='{{cv.cod_n}}'>{{cv.c_votacion}}</option>
+			    {% endif %}
+			{% endfor %}
+		    </select>
+		    <input type='hidden' id='id_cod_viejo' name='cod_viejo' value='{{obj_regelector.cod_viejo}}'>
+		    <input type='hidden' id='id_mun' name='mun' value='{{obj_regelector.mun}}'>
+		</td>
+	    </tr>
+	    <tr>
+		<td><input type="submit" value="Actualizar"/></td>
+	    </tr>
+	</table>
+    </form>
+</body>
+{% endblock contenido %} <!-- Cierre de la carga de datos en el bloque 'contenido' de la plantilla 'base' -->

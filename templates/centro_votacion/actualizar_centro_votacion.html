@@ -1,0 +1,96 @@
+{% extends "base/base.html" %} <!-- Bloque, Plantilla base -->
+    {% block title %}Actualizar Centro de Votación{% endblock %}
+    
+    {% block contenido %}
+	<form method="post">
+	    {% csrf_token %}
+	    <table>
+		<tr>
+		    <td colspan='6' style='background-color: #D9EDF7'>Actualizar Centro Votación</td>
+		</tr>
+		<tr>
+		    <td>Estado</td>
+		    <td>
+			<select id="id_cod_estado" name="estado" required=True style='width: 200px;'>
+			    <option value="">-----------------------------</option>
+
+			    {% for e in list_estado %}
+				{% if e.cod_estado == obj_reg_cen.estado_id%}
+				    <option value='{{e.cod_estado}}' selected='selected'>{{ e.estado }}</option>
+				{% endif %}
+				{% if not e.cod_estado == obj_reg_cen.estado_id %}
+				    <option value='{{e.cod_estado}}'>{{ e.estado }}</option>
+				{% endif %}
+			    {% endfor %}
+			</select>
+		    </td>
+		    <td>Municipio</td>
+		    <td>
+			<select id="id_cod_municipio" name="municipio" required=True style='width: 200px;'>
+			    <option value="">---------</option>
+				{% for m in list_mun %}
+				    {% if m.pk == obj_reg_cen.id_mun%}
+					<option value='{{m.cod_municipio}}' selected='selected'>{{m.municipio}}</option>
+				    {% endif %}
+				    {% if not m.pk == obj_reg_cen.id_mun%}
+					<option value='{{m.cod_municipio}}'>{{m.municipio}}</option>
+				    {% endif %}
+				{% endfor %}
+			</select>
+		    </td>
+		    <td>Parroquia</td>
+		    <td>
+			<select id="id_cod_parroquia" name="parroquia" required=True style='width: 200px;'>
+			    <option value="">---------</option>
+				{% for p in list_par %}
+				    {% if p.cod_parroquia == obj_reg_cen.parroquia%}
+					<option value='{{p.cod_parroquia}}' selected='selected'>{{p.parroquia}}</option>
+				    {% endif %}
+				    {% if not p.cod_parroquia == obj_reg_cen.parroquia%}
+					<option value='{{p.cod_parroquia}}'>{{p.parroquia}}</option>
+				    {% endif %}
+				{% endfor %}
+			</select>
+		    </td>
+		    </tr>
+		    <tr>
+			<td>Codigo centro</td>
+			<td>
+			    <input id="id_cod_n" maxlength="11" name="cod_n" required=True type="number" value='{{obj_reg_cen.cod_n}}'/>
+			    <input id="id_mun" maxlength="11" name="id_mun" type="hidden" value='{{obj_reg_cen.id_mun}}'/>
+			</td>
+			<td>Codigo centro viejo</td>
+			<td>
+			    <input id="id_cod_v" maxlength="11" name="cod_v" required=True type="number" value='{{obj_reg_cen.cod_v}}'/>
+			</td>
+		    </tr>
+		    <tr>
+			<td colspan='6' style='background-color: #D9EDF7'>Centro de votación</td>
+		    </tr>
+		    <tr>
+			<td colspan='6'>
+			    <textarea cols="135" id="id_c_votacion" maxlength="1500" name="c_votacion" rows="10" required=True>{{obj_reg_cen.c_votacion}}</textarea>
+			</td>
+		    </tr>
+		    <tr>
+			<td colspan='6' style='background-color: #D9EDF7'>Dirección</td>
+		    </tr>
+		    <tr>
+			<td colspan='6'>
+			    <textarea cols="135" id="id_direccion" maxlength="1500" name="direccion" rows="10" required=True>{{obj_reg_cen.direccion}}</textarea>
+			</td>
+		    </tr>
+		    <tr>
+			<td><input type="submit" value="Actualizar"/></td>
+		    </tr>
+	    </table>
+	</form>
+    {% endblock contenido%}
+
+
+
+
+
+
+
+

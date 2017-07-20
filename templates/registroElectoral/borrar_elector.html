@@ -1,0 +1,10 @@
+{% extends "base/base.html" %} <!-- Heredando (Bloque) plantilla index -->
+    {% block title %}Eliminar Elector{% endblock %} <!--Bloque para definir el título-->
+    
+    {% block contenido %} <!-- Apertura de la carga de datos en el bloque 'contenido' de la plantilla 'base' -->
+    <form method="post">{% csrf_token %}
+        <!--Ambas formas de mostrar datos del modelo son validas-->
+        ¿ Esta seguro que desea eliminar el registro "{{ object.p_nombre }} {{ eliminar_elector.p_apellido }}"?
+        <input type="submit" value="Eliminar" />
+    </form>
+    {% endblock contenido%} <!-- Cierre de la carga de datos en el bloque 'contenido' de la plantilla 'base' -->

@@ -1,0 +1,25 @@
+{% extends "base/base.html" %} <!-- Bloque, Plantilla base -->
+    {% block title %}Registrar Centro de Votación{% endblock %}
+    
+    {% block extra_head %}
+	<script src="{{STATIC_URL}}js/jquery-1.11.2.min.js"></script>
+    {% endblock extra_head %}
+    
+    {% block contenido %}
+	<form method="post">
+	    {% csrf_token %}
+	    {{form.as_p}}
+	    <input type="submit" value="Registrar"/>
+	</form>
+    <a href='/centro_votacion/data'>
+	<button>Exportar Centros</button>
+    </a>
+    {% endblock contenido%}
+
+
+
+
+
+
+
+
